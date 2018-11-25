@@ -2,8 +2,8 @@ let chooseBtn = document.getElementById('choose'),
 		receiveBtn = document.getElementById('receive'),
 		heading = document.getElementsByTagName('h2')[0],
 		nameInput = document.getElementsByClassName('contactform_name')[0],
-		phoneInput = document.querySelector('.contactform_phone'),
-		mailInput = document.querySelectorAll('.contactform_mail')[0],
+		phoneInput = document.getElementsByName('phone')[0],
+		mailInput = document.getElementsByName('mail')[0],
 		modal = document.querySelector('.modal'),
 		close = document.querySelector('.close'),
 		text = document.getElementsByName('message')[0];
@@ -30,9 +30,20 @@ close.addEventListener('click',function(){
 });
 
 nameInput.addEventListener('input',function(){
-	text.value = "Меня зовут " + nameInput.value + ". И я хочу спросить:";
-
-	if ( nameInput.value == "" ) {
-		text.value = "";
-	}
+	addText();
 });
+
+phoneInput.addEventListener('input',function(){
+	addText();
+});
+
+mailInput.addEventListener('input',function(){
+	addText();
+});
+
+function addText() {
+	let name = (nameInput.value != "") ? "Меня зовут: " + nameInput.value + " " : "",
+			phone = (phoneInput.value != "") ? "мой телефон: " + phoneInput.value + " " : "",
+			mail = (mailInput.value != "") ? "моя почта: " + mailInput.value : "";
+	text.value =  name + phone + mail;
+}
